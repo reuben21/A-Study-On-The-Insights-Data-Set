@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\Users\\harsh\\Desktop\\code\\flask\\chatBott\\model.tflearn"
+all_model_checkpoint_paths: "C:\\Users\\harsh\\Desktop\\code\\flask\\chatBott\\model.tflearn"

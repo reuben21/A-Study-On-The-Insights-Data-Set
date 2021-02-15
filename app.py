@@ -20,7 +20,8 @@ with open("intents.json") as file:
 with open("data.pickle", "rb") as f:
     words, labels, training, output = pickle.load(f)
 
-tensorflow.reset_default_graph()
+# tensorflow.reset_default_graph()
+tensorflow.compat.v1.get_default_graph()
 
 net = tflearn.input_data(shape=[None, len(training[0])])
 net = tflearn.fully_connected(net, 8)
