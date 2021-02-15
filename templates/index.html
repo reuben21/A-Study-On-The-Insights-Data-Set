@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Insights</title>
-	<link rel="stylesheet" href="../static/chat.css">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ChatBot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="../static/main.css" />
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
 </head>
+
 <body>
-
-
-
-
-
-	{# chat design #}
-		<div class="wrapper">
-				<div class="chat-box">
-					<div class="chat-head">
-						<h2>Chat Box</h2>
-						<img src="https://maxcdn.icons8.com/windows10/PNG/16/Arrows/angle_down-16.png" title="Expand Arrow" width="16">
-					</div>
-					<div class="chat-body">
-						<div class="msg-insert">
-		  {# <div class="msg-send"> Send message </div> #}
-		  <div class="msg-receive"> Ask your questions? </div>
-		</div>
-						<div class="chat-text">
-							<textarea placeholder="Send"></textarea>
-						</div>
-					</div>
-				</div>
-			</div>
-
-<script src="../../js/main.css"></script>
+  <main>
+    <section>
+      {% for x in range(count) %}
+      <br />
+      <p>{{list[x]}}</p>
+      <br />
+      <!-- <p>{{reply}}</p>
+      <br /> -->
+       {% endfor %}
+    </section>
+    <div>
+      <form method="POST">
+        <div>
+          <input id="message" name="questions">
+        </div>
+        <div>
+          <button>Send</button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <script>
+    var container = document.querySelector('section');
+    container.scrollTop = container.scrollHeight;
+  </script>
 </body>
+
 </html>
