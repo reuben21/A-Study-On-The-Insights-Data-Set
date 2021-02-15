@@ -1,4 +1,6 @@
+console.log("hello world");
 $(function(){
+
 	var arrow = $('.chat-head img');
 	var textarea = $('.chat-text textarea');
 
