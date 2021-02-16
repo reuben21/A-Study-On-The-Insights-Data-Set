@@ -3,7 +3,7 @@ import cv2
 import threading
 
 app = Flask(__name__)
-import sys
+
 import cv2 as cv
 import numpy as np
 
