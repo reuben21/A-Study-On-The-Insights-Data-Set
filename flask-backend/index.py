@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response,redirect
 import cv2
 import threading
 
@@ -13,7 +13,7 @@ import numpy as np
 lock = threading.Lock()
 scaling_factor = 1
 
-
+print("hello world")
 @app.route('/stream', methods=['GET'])
 def stream():
     return Response(generate(), mimetype="multipart/x-mixed-replace; boundary=frame")
@@ -39,20 +39,16 @@ def generate():
             # read next frame
             rval, frame = vc.read()
             # if blank frame
-            frame = cv.resize(frame, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv.INTER_CUBIC)
-            rows, cols = frame.shape[:2]
-            src_points = np.float32([[0, 0], [cols - 1, 0], [0, rows - 1]])
-            dst_points = np.float32([[cols - 1, 0], [0, 0], [cols - 1, rows - 1]])
+            imgGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-            AffineMatrix = cv.getAffineTransform(src_points, dst_points)
-            frame = cv.warpAffine(frame, AffineMatrix, (cols, rows))
-            gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-            face_rects = face_cascade.detectMultiScale(frame, scaleFactor=1.2, minNeighbors=1)
-            for (x, y, w, h) in face_rects:
-                roi_gray = gray[y:y + h, x:x + w]
-                roi_color = frame[y:y + h, x:x + w]
-                cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
-                cv.putText(frame, "X", (x, 0), cv.FONT_HERSHEY_SIMPLEX, 0.35, (0, 255, 0), 1)
+            faces = face_cascade.detectMultiScale(imgGray, 1.1, 4)
+
+            for (x, y, w, h) in faces:
+                cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            if(faces!=()):
+                print("idhar redirect kar")
+
+            cv.imshow("Result", frame)
             c = cv.waitKey(1)
             if frame is None:
                 continue
@@ -68,7 +64,9 @@ def generate():
         yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
     # release the camera
     vc.release()
-
+@app.route("/success")
+def success():
+    return "success"
 
 if __name__ == '__main__':
     host = "127.0.0.1"
