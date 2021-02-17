@@ -10,6 +10,7 @@ import Box from '@material-ui/core/Box';
 import * as Colors from "../../COLORS";
 import PhoneIcon from '@material-ui/icons/Phone';
 import Toolbar from "@material-ui/core/Toolbar";
+import Section1 from "./Section1/section1"
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -95,7 +96,7 @@ const Sections = () => {
                     variant="fullWidth"
                     aria-label="full width tabs example"
                     style={{
-                        backgroundColor:Colors.DARK_GREENISH
+                        backgroundColor: Colors.DARK_GREENISH
 
                     }}
                 >
@@ -103,7 +104,7 @@ const Sections = () => {
                         padding: 0,
                         fontFamily: "'Montserrat', sans-serif",
                         fontSize: "25px",
-                        color:Colors.DARK_GREENISH,
+                        color: Colors.DARK_GREENISH,
                         backgroundColor: Colors.WHITE_ISH,
                         // border:"1px solid"+Colors.DARK_GREENISH
                     }} label="Section 1"  {...a11yProps(0)} >
@@ -113,14 +114,14 @@ const Sections = () => {
                         padding: 0,
                         fontFamily: "'Montserrat', sans-serif",
                         fontSize: "25px",
-                          color:Colors.DARK_GREENISH,
+                        color: Colors.DARK_GREENISH,
                         backgroundColor: Colors.WHITE_ISH
                     }} label="Section 2" {...a11yProps(1)} />
                     <Tab style={{
                         padding: 0,
                         fontFamily: "'Montserrat', sans-serif",
                         fontSize: "25px",
-                          color:Colors.DARK_GREENISH,
+                        color: Colors.DARK_GREENISH,
                         backgroundColor: Colors.WHITE_ISH
                     }} label="Section 3" {...a11yProps(2)} />
 
@@ -132,7 +133,40 @@ const Sections = () => {
                 onChangeIndex={handleChangeIndex}
             >
                 <TabPanel value={value} index={0} dir={theme.direction}>
-                    Item One
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        padding: 5,
+                        flexWrap: "wrap",
+                        margin: 10
+                    }}>
+                        <Section1
+                            question_no_and_text={"Question 1"}
+
+                            question_image={"https://www.rapidformationsblog.co.uk/wp-content/uploads/2020/05/RF-Profit.jpg"}
+
+                            question_text={"Predict the most profitable product that the company must keep manufacturing"}/>
+                        <Section1
+                            question_no_and_text={"Question 2"}
+
+                            question_image={"https://cdn-images-1.medium.com/max/800/0*dvLU5DDWSnHdQqdC.jpg"}
+
+                            question_text={"Use Logistic regression to determine whether Hamburg is a good destination for\n" +
+                            "exporting more than 100 units of any products."}/>
+                        <Section1
+                            question_no_and_text={"Question 3"}
+
+                            question_image={"https://www.online-tech-tips.com/wp-content/uploads/2020/11/linear-regression-trendline.png"}
+
+                            question_text={"Implement linear regression for ‘Quantity’ vs ‘Unit rate in FC‘ .Analyze this model for overfitting and implement a solution using Ridge regression"}/>
+                        <Section1
+                            question_no_and_text={"Question 4"}
+
+                            question_image={"https://miro.medium.com/max/1280/1*xkuet4YVglp8KWsK90bfRw.gif"}
+
+                            question_text={"Classify the data given into 5 clusters.Analyze and determine the best attribute that can be used for clustering in the given dataset."}/>
+                    </div>
+
                 </TabPanel>
                 <TabPanel value={value} index={1} dir={theme.direction}>
                     Item Two
