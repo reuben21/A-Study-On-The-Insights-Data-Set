@@ -1,9 +1,9 @@
-from flask import Flask, Response, redirect, jsonify
+from flask import Flask, Response, jsonify
 import cv2
 import threading
 from flask_cors import CORS
 import cv2 as cv
-import numpy as np
+import section1 as Question
 
 app = Flask(__name__)
 
@@ -50,6 +50,7 @@ def generate():
                 cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
             if (faces != ()):
                 verified_status = True
+                vc.release()
 
             # cv.imshow("Result", frame)
             c = cv.waitKey(1)
@@ -75,6 +76,19 @@ def success():
         return jsonify({"Veracity": False})
     else:
         return jsonify({"Veracity": True})
+
+
+@app.route("/section1/question1", methods=['GET'])
+def question1():
+    key, val = Question.question1()
+    list_of_keys = []
+    list_of_values = []
+    for k in key:
+        list_of_keys.append(k)
+    for v in val:
+        list_of_values.append(v)
+
+    return jsonify({"key": list_of_keys, "val": list_of_values})
 
 
 if __name__ == '__main__':

@@ -19,7 +19,7 @@ from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 from sklearn.pipeline import Pipeline
 
 
-df = pd.read_csv("Insights.csv")
+df = pd.read_csv("../flask-backend/Insights.csv")
 # print(df.columns.values.tolist())
 
 def model(pipeline, parameters, X_train, y_train, X, y):
