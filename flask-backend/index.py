@@ -1,19 +1,22 @@
-from flask import Flask, Response,redirect
+from flask import Flask, Response, redirect, jsonify
 import cv2
 import threading
-
-app = Flask(__name__)
-
+from flask_cors import CORS
 import cv2 as cv
 import numpy as np
+
+app = Flask(__name__)
 
 # initialize a lock used to ensure thread-safe
 # exchanges of the frames (useful for multiple browsers/tabs
 # are viewing tthe stream)
 lock = threading.Lock()
 scaling_factor = 1
+verified_status = False
 
 print("hello world")
+
+
 @app.route('/stream', methods=['GET'])
 def stream():
     return Response(generate(), mimetype="multipart/x-mixed-replace; boundary=frame")
@@ -21,7 +24,7 @@ def stream():
 
 def generate():
     # grab global references to the lock variable
-    global lock
+    global lock, verified_status
     # initialize the video stream
     vc = cv2.VideoCapture(0)
     face_cascade = cv.CascadeClassifier('haarcascade_frontalface_alt.xml')
@@ -45,10 +48,10 @@ def generate():
 
             for (x, y, w, h) in faces:
                 cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            if(faces!=()):
-                print("idhar redirect kar")
+            if (faces != ()):
+                verified_status = True
 
-            cv.imshow("Result", frame)
+            # cv.imshow("Result", frame)
             c = cv.waitKey(1)
             if frame is None:
                 continue
@@ -64,13 +67,20 @@ def generate():
         yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
     # release the camera
     vc.release()
-@app.route("/success")
+
+
+@app.route("/success", methods=['GET'])
 def success():
-    return "success"
+    if verified_status == False:
+        return jsonify({"Veracity": False})
+    else:
+        return jsonify({"Veracity": True})
+
 
 if __name__ == '__main__':
     host = "127.0.0.1"
     port = 8000
     debug = False
     options = None
+    CORS(app)
     app.run(host, port, debug, options)

@@ -7,6 +7,7 @@
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
     "framer-motion": "^2.9.5",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-modal": "^3.12.1",
@@ -14,8 +15,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-spring": "^8.0.27",
-    "react-swipeable-views": "^0.13.9",
-    "prop-types": "^15.7.2"
+    "react-swipeable-views": "^0.13.9"
   },
   "scripts": {
     "start": "set PORT=3500 && react-scripts start",
@@ -37,5 +37,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "socket.io-client": "^3.1.1"
   }
 }

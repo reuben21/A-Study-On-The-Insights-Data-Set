@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Sections from "../Sections/Section";
 import Modal from 'react-modal';
 import * as Colors from "../../COLORS";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import io from "socket.io-client";
 
 const customStyles = {
     content: {
@@ -19,14 +20,42 @@ const customStyles = {
     }
 
 };
+
+
 const Homepage = () => {
 
     const [modalIsOpen, setIsOpen] = React.useState(true);
     const [isVerifyLoading, verify] = React.useState(true);
+    const [setState, State] = React.useState(true);
 
     function closeModal() {
         setIsOpen(false);
     }
+
+    const url = "http://localhost:8000/success";
+    useEffect(() => {
+
+            const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
+                fetch(url)
+                    .then(response => response.json()).then(data => {
+                    console.log(data)
+                    if (data.Veracity === true) {
+                        setIsOpen(false);
+                        clearInterval(intervalId);
+                    }
+
+                })
+                    .catch(function (error) {
+                        console.log(error)
+
+                    })
+            }, 5000)
+
+             //This is important
+
+        },
+        [url, useState]
+    )
 
 
     return (
@@ -80,8 +109,8 @@ const Homepage = () => {
                     }}
                 >
                     {isVerifyLoading ? <CircularProgress style={{
-                         color: Colors.WHITE_ISH,
-                    }}/>: <></>
+                        color: Colors.WHITE_ISH,
+                    }}/> : <></>
 
                     }
 
