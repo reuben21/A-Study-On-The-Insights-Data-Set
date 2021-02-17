@@ -94,7 +94,7 @@ def question1():
 if __name__ == '__main__':
     host = "127.0.0.1"
     port = 8000
-    debug = False
+    debug = True
     options = None
     CORS(app)
     app.run(host, port, debug, options)

@@ -72,23 +72,7 @@ const Sections = () => {
                 color: Colors.WHITE_ISH,
 
             }}>
-                <Toolbar style={{
-                    // marginTop: "-10px",
-                    marginLeft: "20px",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "20px"
-                }}>
 
-                    <h3>
-                        Project Insights
-                    </h3>
-                    {/*<Button style={{*/}
-                    {/*  backgroundColor: Colors.WHITE_ISH,*/}
-                    {/*  color: Colors.DARK_GREENISH*/}
-                    {/*}}>Login</Button>*/}
-                </Toolbar>
                 <Tabs
                     value={value}
                     onChange={handleChange}
@@ -145,26 +129,35 @@ const Sections = () => {
 
                             question_image={"https://www.rapidformationsblog.co.uk/wp-content/uploads/2020/05/RF-Profit.jpg"}
 
-                            question_text={"Predict the most profitable product that the company must keep manufacturing"}/>
+                            question_text={"Predict the most profitable product that the company must keep manufacturing"}
+
+                            question_link={"/section1/question1"}
+                        />
                         <Section1
                             question_no_and_text={"Question 2"}
 
                             question_image={"https://cdn-images-1.medium.com/max/800/0*dvLU5DDWSnHdQqdC.jpg"}
 
                             question_text={"Use Logistic regression to determine whether Hamburg is a good destination for\n" +
-                            "exporting more than 100 units of any products."}/>
+                            "exporting more than 100 units of any products."}
+                            question_link={"/section1/question2"}
+                        />
                         <Section1
                             question_no_and_text={"Question 3"}
 
                             question_image={"https://www.online-tech-tips.com/wp-content/uploads/2020/11/linear-regression-trendline.png"}
 
-                            question_text={"Implement linear regression for ‘Quantity’ vs ‘Unit rate in FC‘ .Analyze this model for overfitting and implement a solution using Ridge regression"}/>
+                            question_text={"Implement linear regression for ‘Quantity’ vs ‘Unit rate in FC‘ .Analyze this model for overfitting and implement a solution using Ridge regression"}
+                            question_link={"/section1/question3"}
+                        />
                         <Section1
                             question_no_and_text={"Question 4"}
 
                             question_image={"https://miro.medium.com/max/1280/1*xkuet4YVglp8KWsK90bfRw.gif"}
 
-                            question_text={"Classify the data given into 5 clusters.Analyze and determine the best attribute that can be used for clustering in the given dataset."}/>
+                            question_text={"Classify the data given into 5 clusters.Analyze and determine the best attribute that can be used for clustering in the given dataset."}
+                            question_link={"/section1/question4"}
+                        />
                     </div>
 
                 </TabPanel>

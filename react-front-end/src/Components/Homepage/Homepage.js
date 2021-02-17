@@ -24,13 +24,10 @@ const customStyles = {
 
 const Homepage = () => {
 
-    const [modalIsOpen, setIsOpen] = React.useState(true);
+    const [modalIsOpen, setIsOpen] = React.useState(false);
     const [isVerifyLoading, verify] = React.useState(true);
     const [setState, State] = React.useState(true);
 
-    function closeModal() {
-        setIsOpen(false);
-    }
 
     const url = "http://localhost:8000/success";
     useEffect(() => {

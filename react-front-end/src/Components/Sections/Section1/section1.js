@@ -8,7 +8,10 @@ const Section = (props) => {
             <div>
                 <CardView question_no_and_text={props.question_no_and_text}
                           question_image={props.question_image}
-                          question_text={props.question_text}/>
+                          question_text={props.question_text}
+                          question_link={props.question_link}
+
+                />
             </div>
         </>
     );
