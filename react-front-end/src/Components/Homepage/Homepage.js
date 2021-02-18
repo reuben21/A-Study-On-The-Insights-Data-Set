@@ -3,7 +3,6 @@ import Sections from "../Sections/Section";
 import Modal from 'react-modal';
 import * as Colors from "../../COLORS";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import io from "socket.io-client";
 
 const customStyles = {
     content: {
@@ -24,7 +23,7 @@ const customStyles = {
 
 const Homepage = () => {
 
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [modalIsOpen, setIsOpen] = React.useState(true);
     const [isVerifyLoading, verify] = React.useState(true);
     const [setState, State] = React.useState(true);
 

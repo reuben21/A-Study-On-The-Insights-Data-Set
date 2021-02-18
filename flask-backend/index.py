@@ -4,8 +4,10 @@ import threading
 from flask_cors import CORS
 import cv2 as cv
 import section1 as Question
+import randomcolor
 
 app = Flask(__name__)
+rand_color = randomcolor.RandomColor()
 
 # initialize a lock used to ensure thread-safe
 # exchanges of the frames (useful for multiple browsers/tabs
@@ -88,7 +90,11 @@ def question1():
     for v in val:
         list_of_values.append(v)
 
-    return jsonify({"key": list_of_keys, "val": list_of_values})
+    return jsonify({
+        "labels": list_of_keys,
+        "values": list_of_values,
+        "colors": rand_color.generate(hue="blue", count=10)
+    })
 
 
 if __name__ == '__main__':
