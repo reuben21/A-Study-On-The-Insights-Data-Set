@@ -14,7 +14,7 @@ class QUESTION extends Component {
 
     async componentDidMount() {
 
-       const state = await fetch('http://127.0.0.1:8000/section1/question1', {
+       const state = await fetch('http://127.0.0.1:8000/section1/question2', {
             method: 'GET',
             // headers: {
             //     'Content-Type': 'application/json'
@@ -63,16 +63,25 @@ class QUESTION extends Component {
                         color: Colors.DARK_GREENISH
                     }}>Predict the most profitable product that the company must keep manufacturing</h1>
                 </div>
-                {/*<Bar data={data} options={options}/>*/}
-                <img src={"data:image/png;base64," + this.state.value} alt=""/>
-                <div>
-                    <Button component={NavLink} to={"/home"} style={{
+                <div style={{
                         fontFamily: "'Montserrat', sans-serif",
-                        backgroundColor: Colors.MEDIUM_GREENISH,
-                        marginTop: "10px",
-                        color: Colors.WHITE_ISH
-                    }}>Back</Button>
+                        color: Colors.DARK_GREENISH
+                    }}>
+                    <form action="">
+
+                    </form>
+
                 </div>
+                {/*<Bar data={data} options={options}/>*/}
+                {/*<img src={"data:image/png;base64," + this.state.value} alt=""/>*/}
+                {/*<div>*/}
+                {/*    <Button component={NavLink} to={"/home"} style={{*/}
+                {/*        fontFamily: "'Montserrat', sans-serif",*/}
+                {/*        backgroundColor: Colors.MEDIUM_GREENISH,*/}
+                {/*        marginTop: "10px",*/}
+                {/*        color: Colors.WHITE_ISH*/}
+                {/*    }}>Back</Button>*/}
+                {/*</div>*/}
             </>
         );
     }
