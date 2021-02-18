@@ -1,3 +1,5 @@
+import pickle
+import pandas as pd
 from flask import *
 import cv2
 import threading
@@ -23,7 +25,22 @@ scaling_factor = 1
 verified_status = False
 
 print("hello world")
+test_data = {
+    "Product": [0],
+    "Value(USD)": [1400],
+    "Std Unit Price(USD)": [25],
+    "Value In FC": [1200],
+    "Unit Rate In FC": [25],
+    "Unit Rate Currency": [1],
+    "Value(INR)": [95000],
+    "Shipment Mode": [0],
+    "Qty": [10]
 
+}
+test_dataset = pd.DataFrame(test_data)
+loaded_model = pickle.load(open("logisticregression.sav", 'rb'))
+result = loaded_model.predict(test_dataset)
+print("The result is ",result)
 
 @app.route('/stream', methods=['GET'])
 def stream():
