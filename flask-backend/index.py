@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify
+from flask import *
 import cv2
 import threading
 from flask_cors import CORS
@@ -6,11 +6,13 @@ import cv2 as cv
 import section1 as Question
 import randomcolor
 import io
+import os
 from base64 import encodebytes
 from PIL import Image
 import time
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(24)
 rand_color = randomcolor.RandomColor()
 
 # initialize a lock used to ensure thread-safe
@@ -90,6 +92,14 @@ def success():
         return jsonify({"Veracity": False})
     else:
         return jsonify({"Veracity": True})
+
+
+@app.route("/verified", methods=['POST'])
+def verifying():
+    if request.method == 'POST':
+        session['isHuman'] = True
+        print(session)
+        return True
 
 
 @app.route("/section1/question1", methods=['GET'])

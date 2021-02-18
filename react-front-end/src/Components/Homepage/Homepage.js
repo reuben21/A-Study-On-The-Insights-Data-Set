@@ -23,31 +23,36 @@ const customStyles = {
 
 const Homepage = () => {
 
-    const [modalIsOpen, setIsOpen] = React.useState(false);
+    const [modalIsOpen, setIsOpen] = React.useState(true);
     const [isVerifyLoading, verify] = React.useState(true);
     const [setState, State] = React.useState(true);
 
-
+    const statusOfHuman = sessionStorage.getItem('HumanIsVerified')
+    console.log("The Session is",statusOfHuman)
     const url = "http://localhost:8000/success";
     useEffect(() => {
+            if (statusOfHuman===null) {
+                const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
+                    fetch(url)
+                        .then(response => response.json()).then(data => {
+                        console.log(data)
+                        if (data.Veracity === true) {
+                            sessionStorage.setItem('HumanIsVerified', true)
+                            // setIsOpen(false);
 
-            const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
-                fetch(url)
-                    .then(response => response.json()).then(data => {
-                    console.log(data)
-                    if (data.Veracity === true) {
-                        setIsOpen(false);
-                        clearInterval(intervalId);
-                    }
-
-                })
-                    .catch(function (error) {
-                        console.log(error)
+                            clearInterval(intervalId);
+                        }
 
                     })
-            }, 5000)
+                        .catch(function (error) {
+                            console.log(error)
 
-             //This is important
+                        })
+                }, 5000)
+            }
+
+
+            //This is important
 
         },
         [url, useState]
@@ -58,7 +63,7 @@ const Homepage = () => {
         <>
             <Sections/>
             <Modal
-                isOpen={modalIsOpen}
+                isOpen={modalIsOpen && !statusOfHuman}
                 style={customStyles}
                 contentLabel="Example Modal"
             >
