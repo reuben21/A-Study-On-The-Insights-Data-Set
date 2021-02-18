@@ -5,6 +5,10 @@ from flask_cors import CORS
 import cv2 as cv
 import section1 as Question
 import randomcolor
+import io
+from base64 import encodebytes
+from PIL import Image
+import time
 
 app = Flask(__name__)
 rand_color = randomcolor.RandomColor()
@@ -22,6 +26,14 @@ print("hello world")
 @app.route('/stream', methods=['GET'])
 def stream():
     return Response(generate(), mimetype="multipart/x-mixed-replace; boundary=frame")
+
+
+def get_response_image(image_path):
+    pil_img = Image.open(image_path, mode='r')  # reads the PIL image
+    byte_arr = io.BytesIO()
+    pil_img.save(byte_arr, format='PNG')  # convert the PIL image to byte array
+    encoded_img = encodebytes(byte_arr.getvalue()).decode('ascii')  # encode as base64
+    return encoded_img
 
 
 def generate():
@@ -89,12 +101,21 @@ def question1():
         list_of_keys.append(k)
     for v in val:
         list_of_values.append(v)
+    # server side code
+    time.sleep(5)
+    image_path = 'question1.png'  # point to your image location
+    encoded_img = get_response_image(image_path)
+    my_message = 'Image Question1'  # create your message as per your need
+    response = {'Status': 'Success', 'message': my_message, 'ImageBytes': encoded_img}
+    return jsonify(response)
 
-    return jsonify({
-        "labels": list_of_keys,
-        "values": list_of_values,
-        "colors": rand_color.generate(hue="blue", count=10)
-    })
+    #     {
+    #     "labels": list_of_keys,
+    #     "values": list_of_values,
+    #     "colors": rand_color.generate(hue="blue", count=10)
+    # }
+
+    # )
 
 
 if __name__ == '__main__':

@@ -15,11 +15,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-spring": "^8.0.27",
-    "react-swipeable-views": "^0.13.9",
-    "chart.js": "^2.8.0",
-    "chart.piecelabel.js": "^0.15.0",
-    "react-chartjs-2": "^2.11.1",
-    "victory": "^35.4.8"
+    "react-swipeable-views": "^0.13.9"
   },
   "scripts": {
     "start": "set PORT=3500 && react-scripts start",

@@ -1,9 +1,8 @@
 import numpy as np
 import pandas as pd
-
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# sns.set()
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set()
 
 df = pd.read_csv('Insights.csv')
 df.dropna(inplace=True)
@@ -11,6 +10,7 @@ df_filtered = df.copy()
 
 
 def question1():
+    df_filtered = df.copy()
     df_filtered = df.copy()
     df_most_performing = df_filtered.groupby('Product').sum()
     df_most_performing['Profit'] = df_most_performing['Value(INR)'] - (
@@ -25,4 +25,14 @@ def question1():
             break
     sorted_dict = sorted(d1.items(), key=lambda item: item[1], reverse=True)[:10]
     dictionary = dict(sorted_dict)
+    fig = plt.figure()
+    ax = fig.add_axes([0, 0, 1, 1])
+    list_of_keys = []
+    list_of_values = []
+    for k in dictionary.keys():
+        list_of_keys.append(k)
+    for v in dictionary.values():
+        list_of_values.append(v)
+    ax.barh(list_of_keys, list_of_values)
+    fig.savefig('question1.png', bbox_inches='tight')
     return dictionary.keys(), dictionary.values()
