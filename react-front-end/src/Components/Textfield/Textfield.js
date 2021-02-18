@@ -1,10 +1,11 @@
+import { colors } from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-
+import * as Colors from "../../COLORS"
 const CssTextField = withStyles({
     root: {
         '& label.Mui-focused': {
-            color: "#fff3e6",
+            color: Colors.DARK_GREENISH,
             fontSize: "20px",
             marginTop: "-10px",
             fontFamily: "'Montserrat', sans-serif",
@@ -31,23 +32,23 @@ const CssTextField = withStyles({
             },
         },
         '& .MuiInputBase-input': {
-            color: "#fff3e6",
+            color: Colors.DARK_GREENISH,
             fontSize: "20px",
             fontFamily: "'Montserrat', sans-serif !important",
         },
         '& .MuiInput-input': {
-            color: "#fff3e6",
+            color: Colors.DARK_GREENISH,
             fontSize: "20px",
             fontFamily: "'Montserrat', sans-serif",
         },
         '& .MuiFormLabel-root.Mui-disabled': {
-            color: "#fff3e6",
+            color: Colors.DARK_GREENISH,
             fontFamily: "'Montserrat', sans-serif",
             fontSize: "25px",
 
         },
         '& .MuiInputLabel-root': {
-            color: "#fff3e6",
+            color: Colors.DARK_GREENISH,
             display: "block",
             transformOrigin: "top left",
         },
