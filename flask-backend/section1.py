@@ -23,8 +23,6 @@ df_filtered = df.copy()
 
 
 def question1():
-    df_filtered = df.copy()
-    df_filtered = df.copy()
     df_most_performing = df_filtered.groupby('Product').sum()
     df_most_performing['Profit'] = df_most_performing['Value(INR)'] - (
                 df_most_performing['Qty'] * df_most_performing['Value(USD)'])
