@@ -114,11 +114,10 @@ def question1():
     for v in val:
         list_of_values.append(v)
     # server side code
-    time.sleep(5)
+    time.sleep(2)
     image_path = 'question1.png'  # point to your image location
     encoded_img = get_response_image(image_path)
-    my_message = 'Image Question1'  # create your message as per your need
-    response = {'Status': 'Success', 'message': my_message, 'ImageBytes': encoded_img}
+    response = {'Status': 'Success', 'ImageBytes': encoded_img}
     return jsonify(response)
 
     #     {
@@ -130,24 +129,55 @@ def question1():
     # )
 
 
-@app.route("/section1/question2", methods=['GET'])
+@app.route("/section1/question2", methods=['POST'])
 def question2():
+    product = request.json['Product']
+    value_usd = request.json['Value(USD)']
+    std_unit_price = request.json['Std Unit Price(USD)']
+    value_in_fc = request.json['Value In FC']
+    unit_rate_in_fc = request.json['Unit Rate In FC']
+    unit_rate_currency = request.json['Unit Rate Currency']
+    value_inr = request.json['Value(INR)']
+    shipment_mode = request.json['Shipment Mode']
+    qty = request.json['Qty']
+    print(product,
+          value_usd,
+          std_unit_price,
+          value_in_fc,
+          unit_rate_in_fc,
+          unit_rate_currency,
+          value_inr,
+          shipment_mode,
+          qty)
+    # test_data = {
+    #     "Product": [0],
+    #     "Value(USD)": [1400],
+    #     "Std Unit Price(USD)": [25],
+    #     "Value In FC": [1200],
+    #     "Unit Rate In FC": [25],
+    #     "Unit Rate Currency": [1],
+    #     "Value(INR)": [95000],
+    #     "Shipment Mode": [0],
+    #     "Qty": [10]
+    #
+    # }
+
     test_data = {
-        "Product": [0],
-        "Value(USD)": [1400],
-        "Std Unit Price(USD)": [25],
-        "Value In FC": [1200],
-        "Unit Rate In FC": [25],
-        "Unit Rate Currency": [1],
-        "Value(INR)": [95000],
-        "Shipment Mode": [0],
-        "Qty": [10]
+        "Product": product,
+        "Value(USD)": value_usd,
+        "Std Unit Price(USD)": std_unit_price,
+        "Value In FC": value_in_fc,
+        "Unit Rate In FC": unit_rate_in_fc,
+        "Unit Rate Currency": unit_rate_currency,
+        "Value(INR)": value_inr,
+        "Shipment Mode": shipment_mode,
+        "Qty": qty
 
     }
     test_dataset = pd.DataFrame(test_data)
     loaded_model = pickle.load(open("logisticregression.sav", 'rb'))
     result = loaded_model.predict(test_dataset)
-    return jsonify({"result": result})
+    return jsonify({"result": int(result[0])})
 
 
 if __name__ == '__main__':

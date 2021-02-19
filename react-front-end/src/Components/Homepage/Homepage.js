@@ -38,7 +38,7 @@ const Homepage = () => {
                         console.log(data)
                         if (data.Veracity === true) {
                             sessionStorage.setItem('HumanIsVerified', true)
-                            // setIsOpen(false);
+                            setIsOpen(false);
 
                             clearInterval(intervalId);
                         }
