@@ -3,7 +3,7 @@ import {Button} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import * as Colors from "../../../../COLORS";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import CssTextField from "../../../Textfield/Textfield"
 class QUESTION extends Component {
     state = {
         key: [],
@@ -61,16 +61,54 @@ class QUESTION extends Component {
                     <h1 style={{
                         fontFamily: "'Montserrat', sans-serif",
                         color: Colors.DARK_GREENISH
-                    }}>Predict the most profitable product that the company must keep manufacturing</h1>
+                    }}>Predict the most 123profitable product that the company must keep manufacturing</h1>
                 </div>
+                {/*<Bar data={data} options={options}/>*/}
                 <div style={{
-                        fontFamily: "'Montserrat', sans-serif",
-                        color: Colors.DARK_GREENISH
-                    }}>
-                    <form action="">
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column"                }}>
+                <CssTextField
+        
+        label="Product"
+        variant="outlined"
+        id="custom-css-outlined-input"
+      />
 
-                    </form>
+<CssTextField
+        
+        label="Product"
+        variant="outlined"
+        id="custom-css-outlined-input"
+      />
 
+<CssTextField
+        
+        label="Product"
+        variant="outlined"
+        id="custom-css-outlined-input"
+      />
+
+<CssTextField
+        
+        label="Product"
+        variant="outlined"
+        id="custom-css-outlined-input"
+      />
+
+<CssTextField
+        
+        label="Product"
+        variant="outlined"
+        id="custom-css-outlined-input"
+      />
+
+<CssTextField
+        
+        label="Product"
+        variant="outlined"
+        id="custom-css-outlined-input"
+      />
                 </div>
                 {/*<Bar data={data} options={options}/>*/}
                 {/*<img src={"data:image/png;base64," + this.state.value} alt=""/>*/}
