@@ -8,9 +8,11 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression  # needed for creating a model
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.linear_model import Ridge
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import PolynomialFeatures
 
 sns.set()
 
@@ -118,12 +120,56 @@ def question3a():
     # data[~data.isin([np.nan, np.inf, -np.inf]).any(1)]
     # data.replace([np.inf, -np.inf], np.nan).dropna(axis=1)
     data.fillna(0, inplace=True)
-    y = data['Unit Rate In FC']
-    x1 = data['Qty']
+    X = np.array(df['Qty']).reshape((-1, 1))
+    y = np.array(df['Unit Rate In FC']).reshape((-1, 1))
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+    model = LinearRegression()
+    model.fit(X, y)
     fig = plt.figure()
-    plt.scatter(x1, y, color='black')
-    yhat = -0.0003 * x1 + 21.7330
-    plt.plot(x1, yhat, lw=4, c='#5ea3a3', label='regression line')
-    plt.xlabel('Qty', fontsize=20)
-    plt.ylabel('Unit Rate in FC', fontsize=20)
+    plt.scatter(X, y, alpha=0.5, color='black')
+    plt.plot(X, model.predict(X), color='#5ea3a3', linewidth=2)
+    plt.title("Qty VS Unit Rate in FC")
+    plt.xlabel("Qty")
+    plt.ylabel("Unit Rate in FC")
     fig.savefig('question3a.png', bbox_inches='tight')
+
+
+def question3b():
+    data = df_filtered.drop(
+        ['Date', 'HS Code', 'Product', 'Specific Product', 'Port of Origin', 'Country of Destination',
+         'Port of Destination', 'Value(USD)', 'Std Qty', 'Std Unit', 'Std Unit Price(USD)', 'Unit',
+         'Value In FC', 'Unit Rate Currency', 'Value(INR)', 'Shipment Mode', 'Invoice Value INR'],
+        axis=1)
+    # data[~data.isin([np.nan, np.inf, -np.inf]).any(1)]
+    # data.replace([np.inf, -np.inf], np.nan).dropna(axis=1)
+    data.fillna(0, inplace=True)
+    X_data = np.array(df['Qty']).reshape((-1, 1))
+    y_data = np.array(df['Unit Rate In FC']).reshape((-1, 1))
+    X_train, X_test, y_train, y_test = train_test_split(X_data, y_data, test_size=0.2, random_state=0)
+    R = Ridge(alpha=0.0001)
+    R.fit(X_train, y_train)
+    alphas = [1e-15, 1e-10, 1e-8, 1e-3, 1e-2, 1, 5, 10, 20, 30, 35, 40, 45, 50, 55, 100]
+    cs = ['b', 'g', 'r']
+    fig = plt.figure()
+    plt.scatter(X_data, y_data, alpha=0.5, color='black')
+    plt.plot(X_data, y_data, 'b+', label='Datapoints')
+    plt.title("Qty VS Unit Rate in FC")
+    plt.xlabel("Qty")
+    plt.ylabel("Unit Rate in FC")
+
+    for alpha, c in zip(alphas, cs):
+        preds = get_preds_ridge(X_data, y_data, alpha)
+        # Plot
+        plt.plot(sorted(X_data[:, 0]), preds[np.argsort(X_data[:, 0])], c, label='Alpha: {}'.format(alpha))
+
+    plt.legend()
+    fig.savefig('question3b.png', bbox_inches='tight')
+
+
+def get_preds_ridge(X, Y, alpha):
+    model = Pipeline([
+        ('poly_feats', PolynomialFeatures(degree=16)),
+        ('ridge', Ridge(alpha=alpha))
+    ])
+    model.fit(X, Y)
+    return model.predict(X)

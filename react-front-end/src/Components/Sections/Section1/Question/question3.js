@@ -7,15 +7,15 @@ import Grid from '@material-ui/core/Grid';
 
 class QUESTION extends Component {
     state = {
-        key: [],
-        value: [],
+        value1: [],
+        value2: [],
         colors: [],
         loading: true,
     }
 
     async componentDidMount() {
 
-        const state = await fetch('http://127.0.0.1:8000/section1/question3a', {
+        const state = await fetch('http://127.0.0.1:8000/section1/question3', {
             method: 'GET',
             // headers: {
             //     'Content-Type': 'application/json'
@@ -27,8 +27,8 @@ class QUESTION extends Component {
                 console.log(data)
                 this.setState({
                     // key: data.labels,
-                    value: data.ImageBytes,
-
+                    value1: data.ImageBytes1,
+                    value2: data.ImageBytes2,
                     // colors: data.colors,
 
                 })
@@ -80,7 +80,15 @@ class QUESTION extends Component {
                         color: Colors.DARK_GREENISH,
                         padding: 20
                     }}>Below Implemented is the Linear Regression</h3>
-                    <img src={"data:image/png;base64," + this.state.value} alt=""/>
+                    <img src={"data:image/png;base64," + this.state.value1} alt=""/>
+
+
+                    <h3 style={{
+                        fontFamily: "'Montserrat', sans-serif",
+                        color: Colors.DARK_GREENISH,
+                        padding: 20
+                    }}>Below Implemented is the Ridge Regression</h3>
+                    <img src={"data:image/png;base64," + this.state.value2} alt=""/>
                 </Grid>
                 <div>
                     <Button component={NavLink} to={"/home"} style={{

@@ -180,13 +180,24 @@ def question2():
     return jsonify({"result": int(result[0])})
 
 
-@app.route("/section1/question3a", methods=['GET'])
+@app.route("/section1/question3", methods=['GET'])
 def question3a():
     Question.question3a()
-    image_path = 'question3a.png'  # point to your image location
-    encoded_img = get_response_image(image_path)
-    response = {'Status': 'Success', 'ImageBytes': encoded_img}
+    Question.question3b()
+    image_path1 = 'question3a.png'  # point to your image location
+    encoded_img1 = get_response_image(image_path1)
+    image_path2 = 'question3b.png'  # point to your image location
+    encoded_img2 = get_response_image(image_path2)
+    response = {'ImageBytes1': encoded_img1, 'ImageBytes2': encoded_img2}
     return jsonify(response)
+
+
+# @app.route("/section1/question3b", methods=['GET'])
+# def question3b():
+#     image_path2 = 'question3b.png'  # point to your image location
+#     encoded_img2 = get_response_image(image_path2)
+#     response = {'Status': 'Success', 'ImageBytes': encoded_img}
+#     return jsonify(response)
 
 
 if __name__ == '__main__':
