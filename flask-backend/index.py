@@ -180,6 +180,15 @@ def question2():
     return jsonify({"result": int(result[0])})
 
 
+@app.route("/section1/question3a", methods=['GET'])
+def question3a():
+    Question.question3a()
+    image_path = 'question3a.png'  # point to your image location
+    encoded_img = get_response_image(image_path)
+    response = {'Status': 'Success', 'ImageBytes': encoded_img}
+    return jsonify(response)
+
+
 if __name__ == '__main__':
     host = "127.0.0.1"
     port = 8000

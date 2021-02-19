@@ -8,12 +8,14 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression #needed for creating a model
+from sklearn.linear_model import LogisticRegression  # needed for creating a model
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report, confusion_matrix
+
 sns.set()
 
 from scipy import stats
+
 stats.chisqprob = lambda chisq, df: stats.chi2.sf(chisq, df)
 sns.set()
 
@@ -25,7 +27,7 @@ df_filtered = df.copy()
 def question1():
     df_most_performing = df_filtered.groupby('Product').sum()
     df_most_performing['Profit'] = df_most_performing['Value(INR)'] - (
-                df_most_performing['Qty'] * df_most_performing['Value(USD)'])
+            df_most_performing['Qty'] * df_most_performing['Value(USD)'])
     prod = df_most_performing.index.tolist()
     profit = df_most_performing['Profit'].tolist()
     d1 = {}
@@ -106,3 +108,22 @@ def question2(test_data_from_user):
     # plt.show()
 
 
+def question3a():
+    data = df_filtered.copy()
+    data = df_filtered.drop(
+        ['Date', 'HS Code', 'Product', 'Specific Product', 'Port of Origin', 'Country of Destination',
+         'Port of Destination', 'Value(USD)', 'Std Qty', 'Std Unit', 'Std Unit Price(USD)', 'Unit',
+         'Value In FC', 'Unit Rate Currency', 'Value(INR)', 'Shipment Mode', 'Invoice Value INR'],
+        axis=1)
+    # data[~data.isin([np.nan, np.inf, -np.inf]).any(1)]
+    # data.replace([np.inf, -np.inf], np.nan).dropna(axis=1)
+    data.fillna(0, inplace=True)
+    y = data['Unit Rate In FC']
+    x1 = data['Qty']
+    fig = plt.figure()
+    plt.scatter(x1, y, color='black')
+    yhat = -0.0003 * x1 + 21.7330
+    plt.plot(x1, yhat, lw=4, c='#5ea3a3', label='regression line')
+    plt.xlabel('Qty', fontsize=20)
+    plt.ylabel('Unit Rate in FC', fontsize=20)
+    fig.savefig('question3a.png', bbox_inches='tight')
