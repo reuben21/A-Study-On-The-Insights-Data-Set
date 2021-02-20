@@ -24,7 +24,7 @@ lock = threading.Lock()
 scaling_factor = 1
 verified_status = False
 
-print("hello world")
+print("hello world again")
 
 
 @app.route('/stream', methods=['GET'])
