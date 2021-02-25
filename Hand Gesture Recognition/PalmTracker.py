@@ -6,8 +6,8 @@ import os
 # global variables
 bg = None
 
-if not os.path.isdir( 'Letter_L_Test' ) :
-    os.mkdir( 'Letter_L_Test' )  # make sure the directory exists
+if not os.path.isdir( 'Letter_M_Test' ) :
+    os.mkdir( 'Letter_M_Test' )  # make sure the directory exists
     
 def run_avg(image, aWeight):
     global bg
@@ -108,7 +108,7 @@ def main():
 
                         # Mention the directory in which you wanna store the images followed by the image name
                         print("Writing")
-                        cv2.imwrite("./Letter_L_Test/Letter_L_" +
+                        cv2.imwrite("./Letter_M_Test/Letter_M_" +
                                     str(image_num) + '.png', thresholded)
                         image_num += 1
                     cv2.imshow("Thesholded", thresholded)
