@@ -6,8 +6,8 @@ import os
 # global variables
 bg = None
 
-if not os.path.isdir( 'Letter_M_Test' ) :
-    os.mkdir( 'Letter_M_Test' )  # make sure the directory exists
+if not os.path.isdir( 'Letter_L' ) :
+    os.mkdir( 'Letter_L' )  # make sure the directory exists
     
 def run_avg(image, aWeight):
     global bg
@@ -53,7 +53,7 @@ def main():
     camera = cv2.VideoCapture(0)
 
     # region of interest (ROI) coordinates
-    top, right, bottom, left = 10, 350, 225, 590
+    top, right, bottom, left = 100, 350, 315, 590
 
     # initialize num of frames
     num_frames = 0
@@ -107,8 +107,8 @@ def main():
                     if start_recording:
 
                         # Mention the directory in which you wanna store the images followed by the image name
-                        print("Writing")
-                        cv2.imwrite("./Letter_M_Test/Letter_M_" +
+                        print("Writing"+str(image_num))
+                        cv2.imwrite("./Letter_L_Test/Letter_L_" +
                                     str(image_num) + '.png', thresholded)
                         image_num += 1
                     cv2.imshow("Thesholded", thresholded)
@@ -126,7 +126,7 @@ def main():
             keypress = cv2.waitKey(1) & 0xFF
 
             # if the user pressed "q", then stop looping
-            if keypress == ord("q") or image_num > 100:
+            if keypress == ord("q") or image_num > 1000:
                 break
             if keypress == ord("s"):
                 start_recording = True

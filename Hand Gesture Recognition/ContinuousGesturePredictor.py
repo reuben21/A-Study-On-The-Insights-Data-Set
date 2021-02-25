@@ -64,7 +64,7 @@ def main():
     camera = cv2.VideoCapture(0)
 
     # region of interest (ROI) coordinates
-    top, right, bottom, left = 10, 350, 225, 590
+    top, right, bottom, left = 100, 350, 315, 590
 
     # initialize num of frames
     num_frames = 0
@@ -147,13 +147,15 @@ def showStatistics(predictedClass, confidence):
 
     textImage = np.zeros((300,512,3), np.uint8)
     className = ""
-
+    print(predictedClass)
     if predictedClass == 0:
         className = "Swing"
     elif predictedClass == 1:
         className = "Palm"
     elif predictedClass == 2:
         className = "Fist"
+    elif predictedClass == 3:
+        className = "L-Letter"
 
     cv2.putText(textImage,"Pedicted Class : " + className, 
     (30, 30), 
@@ -199,13 +201,13 @@ convnet=max_pool_2d(convnet,2)
 convnet=fully_connected(convnet,1000,activation='relu')
 convnet=dropout(convnet,0.75)
 
-convnet=fully_connected(convnet,3,activation='softmax')
+convnet=fully_connected(convnet,4,activation='softmax')
 
 convnet=regression(convnet,optimizer='adam',learning_rate=0.001,loss='categorical_crossentropy',name='regression')
 
 model=tflearn.DNN(convnet,tensorboard_verbose=0)
 
 # Load Saved Model
-model.load("TrainedModel/GestureRecogModel.tfl")
+model.load("TrainedLettersModel/LetterLModel.tfl")
 
 main()
