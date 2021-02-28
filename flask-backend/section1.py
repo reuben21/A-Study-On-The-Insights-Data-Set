@@ -53,7 +53,7 @@ def question1():
     return dictionary.keys(), dictionary.values()
 
 
-def question2(test_data_from_user):
+def question2():
     raw_data = pd.read_csv('Insights.csv')
     raw_data.head()
     data = raw_data.copy()
@@ -76,38 +76,7 @@ def question2(test_data_from_user):
     df_filtered['Profit'] = df_filtered['Value(INR)'] - (df_filtered['Qty'] * df_filtered['Value(USD)'])
     df_filtered['Profit_logic'] = df_filtered['Profit'].map(lambda x: 0 if x < 0 else 1)
     df_filtered = df_filtered.drop(['Profit'], axis=1)
-    x1_column_name = df_filtered.columns.tolist()[0:len(df_filtered.columns) - 1]
-    y = df_filtered['Profit_logic']
-    x = df_filtered[x1_column_name]
-    # print(y.head())
-    # print("X HEAD************")
-    # print(x.head())
-    # we dont need this in independant data , so dropping
-    X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size=0.2, random_state=20)
-    X_train.fillna(X_train.mean(), inplace=True)  # this will replace all NAN values by their mean.
-    Y_train.fillna(Y_train.mean(), inplace=True)  # this will replace all NAN values by their mean.
-    # print(X_train.shape)
-    # print(X_test.shape)
-    # print(Y_train.shape)
-    # print(Y_test.shape)
-    logis = LogisticRegression()
-    logis.fit(X_train, Y_train)
-    predictions = logis.predict(X_test)
-    # print(classification_report(Y_test, predictions))
-    #
-    # print(accuracy_score(Y_test, predictions))
-    # cm = confusion_matrix(Y_test,predictions)
-    #
-    # fig, ax = plt.subplots(figsize=(8, 8))
-    # ax.imshow(cm)
-    # ax.grid(False)
-    # ax.xaxis.set(ticks=(0, 1), ticklabels=('Predicted 0s', 'Predicted 1s'))
-    # ax.yaxis.set(ticks=(0, 1), ticklabels=('Actual 0s', 'Actual 1s'))
-    # ax.set_ylim(1.5, -0.5)
-    # for i in range(2):
-    #     for j in range(2):
-    #         ax.text(j, i, cm[i, j], ha='center', va='center', color='red')
-    # plt.show()
+    return currency, shipment, prod
 
 
 def question3a():

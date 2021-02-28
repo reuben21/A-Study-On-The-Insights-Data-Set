@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import css from './question.module.css'
 import * as Colors from "../../../../COLORS";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {Button} from "@material-ui/core";
+import {Button, MenuItem} from "@material-ui/core";
 import CssTextField from "../../../Textfield/Textfield"
 
 class QUESTION extends Component {
@@ -24,6 +24,9 @@ class QUESTION extends Component {
         key: [],
         value: [],
         colors: [],
+        getProductList: [],
+        getCurrencyList: [],
+        getShipmentModeList: [],
         loading: true,
         product: 0,
         value_usd: 1400,
@@ -34,6 +37,7 @@ class QUESTION extends Component {
         value_inr: 95000,
         shipment_mode: 0,
         qty: 10,
+        result: null
     }
 
     async componentDidMount() {
@@ -50,8 +54,9 @@ class QUESTION extends Component {
                 console.log(data)
                 this.setState({
                     // key: data.labels,
-                    value: data.ImageBytes,
-
+                    getProductList: data.prod,
+                    getCurrencyList: data.currency,
+                    getShipmentModeList: data.shipment
                     // colors: data.colors,
 
                 })
@@ -119,6 +124,11 @@ class QUESTION extends Component {
                 })
             }).then(res => res.json()).then(data => {
                 console.log(data)
+                this.setState({
+                    result: !!data.result
+                })
+
+                console.log(this.state.result)
 
             }).catch(function (error) {
                 console.log(error);
@@ -137,6 +147,30 @@ class QUESTION extends Component {
         }
         // isVerifyLoading ?  : <></>
 
+        const returnResult = () => {
+            if (this.state.result === null) {
+                return <h1 style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    color: Colors.DARK_GREENISH,
+                    padding: 20
+                }}>" "</h1>
+            }
+            if (this.state.result === true) {
+                return <h1 style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    color: Colors.DARK_GREENISH,
+                    padding: 20
+                }}>"Yes! Hamburg is a Good Destination"</h1>
+            }
+            if (this.state.result === false) {
+                return <h1 style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    color: Colors.DARK_GREENISH,
+                    padding: 20
+                }}>"Yes! Hamburg is a Not Good Destination"</h1>
+            }
+        }
+
 
         return (
             <>
@@ -154,119 +188,149 @@ class QUESTION extends Component {
                 <form noValidate onSubmit={this.submitHandler}>
 
 
-                <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    flexDirection: "column",
-                    alignItems: "center"
-                }}>
-                    <div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        alignItems: "center"
+                    }}>
+                        <div>
 
 
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.product}
-                            value={this.state.product}
-                            label="Product"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
+                            <CssTextField
+                                size={"small"}
+                                select
+                                className={css.textfield}
+                                inputRef={this.product}
+                                value={this.state.product}
 
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.value_usd}
-                            value={this.state.value_usd}
+                                label="Product"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            >
+                                {this.state.getProductList.map((option, j) => (
+                                    <MenuItem key={j} value={j}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </CssTextField>
 
-                            label="Value USD"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
+                            <CssTextField
+                                size={"small"}
+                                className={css.textfield}
+                                inputRef={this.value_usd}
+                                value={this.state.value_usd}
 
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.std_unit_price}
-                            value={this.state.std_unit_price}
+                                label="Value USD"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            />
 
-                            label="Standard Unit Price"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
+                            <CssTextField
+                                size={"small"}
+                                className={css.textfield}
+                                inputRef={this.std_unit_price}
+                                value={this.state.std_unit_price}
 
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.value_in_fc}
-                            value={this.state.value_in_fc}
+                                label="Standard Unit Price"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            />
 
-                            label="Value In FC"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
+                            <CssTextField
+                                size={"small"}
+                                className={css.textfield}
+                                inputRef={this.value_in_fc}
+                                value={this.state.value_in_fc}
 
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.unit_rate_in_fc}
-                            value={this.state.unit_rate_in_fc}
+                                label="Value In FC"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            />
 
-                            label="Unit Rate in FC"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
+                            <CssTextField
+                                size={"small"}
 
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.unit_rate_currency}
-                            value={this.state.unit_rate_currency}
+                                className={css.textfield}
+                                inputRef={this.unit_rate_in_fc}
+                                value={this.state.unit_rate_in_fc}
 
-                            label="Unit Rate Currency"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.value_inr}
-                            value={this.state.value_inr}
+                                label="Unit Rate in FC"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            >
 
-                            label="Value (INR)"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        /><CssTextField
-                        size={"small"}
-                        className={css.textfield}
-                        inputRef={this.shipment_mode}
-                        value={this.state.shipment_mode}
+                            </CssTextField>
 
-                        label="Shipment Mode"
-                        variant="outlined"
-                        id="custom-css-outlined-input"
-                    />
-                        <CssTextField
-                            size={"small"}
-                            className={css.textfield}
-                            inputRef={this.qty}
-                            value={this.state.qty}
+                            <CssTextField
+                                size={"small"}
+                                className={css.textfield}
+                                inputRef={this.unit_rate_currency}
+                                value={this.state.unit_rate_currency}
+                                select
+                                label="Unit Rate Currency"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            >
+                                {this.state.getCurrencyList.map((option, j) => (
+                                    <MenuItem key={j} value={j}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </CssTextField>
+                            <CssTextField
+                                size={"small"}
+                                className={css.textfield}
+                                inputRef={this.value_inr}
+                                value={this.state.value_inr}
 
-                            label="Quantity"
-                            variant="outlined"
-                            id="custom-css-outlined-input"
-                        />
+                                label="Value (INR)"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            />
+                            <CssTextField
+                                size={"small"}
+                                select
+                                className={css.textfield}
+                                inputRef={this.shipment_mode}
+                                value={this.state.shipment_mode}
+                                label="Shipment Mode"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            >
+                                {this.state.getShipmentModeList.map((option, j) => (
+                                    <MenuItem key={j} value={j}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
+                            </CssTextField>
+                            <CssTextField
+                                size={"small"}
+                                className={css.textfield}
+                                inputRef={this.qty}
+                                value={this.state.qty}
+
+                                label="Quantity"
+                                variant="outlined"
+                                id="custom-css-outlined-input"
+                            />
+                        </div>
+                        <div>
+                            <Button type={"submit"} style={{
+                                fontFamily: "'Montserrat', sans-serif",
+                                backgroundColor: Colors.MEDIUM_GREENISH,
+                                marginTop: "10px",
+                                color: Colors.WHITE_ISH
+                            }}>Submit</Button>
+                        </div>
                     </div>
-                    <div>
-                        <Button type={"submit"} style={{
-                            fontFamily: "'Montserrat', sans-serif",
-                            backgroundColor: Colors.MEDIUM_GREENISH,
-                            marginTop: "10px",
-                            color: Colors.WHITE_ISH
-                        }}>Submit</Button>
-                    </div>
+                </form>
+
+                <div>
+
+                    {returnResult()}
+
                 </div>
-                    </form>
                 {/*<Bar data={data} options={options}/>*/}
                 {/*<img src={"data:image/png;base64," + this.state.value} alt=""/>*/}
 

@@ -129,55 +129,59 @@ def question1():
     # )
 
 
-@app.route("/section1/question2", methods=['POST'])
+@app.route("/section1/question2", methods=['POST','GET'])
 def question2():
-    product = request.json['Product']
-    value_usd = request.json['Value(USD)']
-    std_unit_price = request.json['Std Unit Price(USD)']
-    value_in_fc = request.json['Value In FC']
-    unit_rate_in_fc = request.json['Unit Rate In FC']
-    unit_rate_currency = request.json['Unit Rate Currency']
-    value_inr = request.json['Value(INR)']
-    shipment_mode = request.json['Shipment Mode']
-    qty = request.json['Qty']
-    print(product,
-          value_usd,
-          std_unit_price,
-          value_in_fc,
-          unit_rate_in_fc,
-          unit_rate_currency,
-          value_inr,
-          shipment_mode,
-          qty)
-    # test_data = {
-    #     "Product": [0],
-    #     "Value(USD)": [1400],
-    #     "Std Unit Price(USD)": [25],
-    #     "Value In FC": [1200],
-    #     "Unit Rate In FC": [25],
-    #     "Unit Rate Currency": [1],
-    #     "Value(INR)": [95000],
-    #     "Shipment Mode": [0],
-    #     "Qty": [10]
-    #
-    # }
+    if request.method == 'POST':
+        product = request.json['Product']
+        value_usd = request.json['Value(USD)']
+        std_unit_price = request.json['Std Unit Price(USD)']
+        value_in_fc = request.json['Value In FC']
+        unit_rate_in_fc = request.json['Unit Rate In FC']
+        unit_rate_currency = request.json['Unit Rate Currency']
+        value_inr = request.json['Value(INR)']
+        shipment_mode = request.json['Shipment Mode']
+        qty = request.json['Qty']
+        print(product,
+              value_usd,
+              std_unit_price,
+              value_in_fc,
+              unit_rate_in_fc,
+              unit_rate_currency,
+              value_inr,
+              shipment_mode,
+              qty)
+        # test_data = {
+        #     "Product": [0],
+        #     "Value(USD)": [1400],
+        #     "Std Unit Price(USD)": [25],
+        #     "Value In FC": [1200],
+        #     "Unit Rate In FC": [25],
+        #     "Unit Rate Currency": [1],
+        #     "Value(INR)": [95000],
+        #     "Shipment Mode": [0],
+        #     "Qty": [10]
+        #
+        # }
 
-    test_data = {
-        "Product": product,
-        "Value(USD)": value_usd,
-        "Std Unit Price(USD)": std_unit_price,
-        "Value In FC": value_in_fc,
-        "Unit Rate In FC": unit_rate_in_fc,
-        "Unit Rate Currency": unit_rate_currency,
-        "Value(INR)": value_inr,
-        "Shipment Mode": shipment_mode,
-        "Qty": qty
+        test_data = {
+            "Product": product,
+            "Value(USD)": value_usd,
+            "Std Unit Price(USD)": std_unit_price,
+            "Value In FC": value_in_fc,
+            "Unit Rate In FC": unit_rate_in_fc,
+            "Unit Rate Currency": unit_rate_currency,
+            "Value(INR)": value_inr,
+            "Shipment Mode": shipment_mode,
+            "Qty": qty
 
-    }
-    test_dataset = pd.DataFrame(test_data)
-    loaded_model = pickle.load(open("logisticregression.sav", 'rb'))
-    result = loaded_model.predict(test_dataset)
-    return jsonify({"result": int(result[0])})
+        }
+        test_dataset = pd.DataFrame(test_data)
+        loaded_model = pickle.load(open("logisticregression.sav", 'rb'))
+        result = loaded_model.predict(test_dataset)
+        return jsonify({"result": int(result[0])})
+    if request.method == 'GET':
+        currency, shipment, prod = Question.question2()
+        return jsonify({"currency": currency, "shipment": shipment, "prod": prod})
 
 
 @app.route("/section1/question3", methods=['GET'])
