@@ -241,7 +241,7 @@ model=tflearn.DNN(convnet,tensorboard_verbose=0)
 loadedImages, outputVectors = shuffle(loadedImages, outputVectors, random_state=42)
 
 # Train model
-model.fit(loadedImages, outputVectors, n_epoch=50,
+model.fit(loadedImages, outputVectors, n_epoch=1,
            validation_set = (testImages, testLabels),
            snapshot_step=100, show_metric=True, run_id='convnet_coursera')
 
