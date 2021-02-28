@@ -8,8 +8,8 @@ def resizeImage(imageName):
     img = img.resize((basewidth,hsize), Image.ANTIALIAS)
     img.save(imageName)
 
-for i in range(0, 1001):
+for i in range(0, 100):
     # Mention the directory in which you wanna resize the images followed by the image name
-    resizeImage("./Letter_L/Letter_L_" + str(i) + '.png')
+    resizeImage("./six_test/six_test_" + str(i) + '.png')
 
 

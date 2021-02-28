@@ -24,11 +24,6 @@ for i in range(0, 1000):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     loadedImages.append(gray_image.reshape(89, 100, 1))
 
-#Load Images From Palm
-for i in range(0, 1000):
-    image = cv2.imread('Dataset/PalmImages/palm_' + str(i) + '.png')
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    loadedImages.append(gray_image.reshape(89, 100, 1))
 
 #Load Images From Fist
 for i in range(0, 1000):
@@ -36,10 +31,53 @@ for i in range(0, 1000):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     loadedImages.append(gray_image.reshape(89, 100, 1))
 
+# one
+for i in range(0, 1000):
+    image = cv2.imread('Dataset/Letter_D/Letter_D_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    loadedImages.append(gray_image.reshape(89, 100, 1))
+
+# two
+for i in range(0, 1000):
+    image = cv2.imread('Dataset/two/two_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    loadedImages.append(gray_image.reshape(89, 100, 1))
+
+# three
+for i in range(0, 1000):
+    image = cv2.imread('Dataset/Letter_F/Letter_F_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    loadedImages.append(gray_image.reshape(89, 100, 1))
+
+# four
+for i in range(0, 1000):
+    image = cv2.imread('Dataset/four/four_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    loadedImages.append(gray_image.reshape(89, 100, 1))
+
+
+# five
+#Load Images From Palm
+for i in range(0, 1000):
+    image = cv2.imread('Dataset/PalmImages/palm_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    loadedImages.append(gray_image.reshape(89, 100, 1))
+
+# six
+
+for i in range(0, 1000):
+    image = cv2.imread('Dataset/thumbs_up/thumbs_up_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    loadedImages.append(gray_image.reshape(89, 100, 1))
+
+
+# letter L
 for i in range(0, 1000):
     image = cv2.imread('Dataset/Letter_L/Letter_L_' + str(i) + '.png')
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     loadedImages.append(gray_image.reshape(89, 100, 1))
+
+
 
 
 # In[ ]:
@@ -49,20 +87,35 @@ for i in range(0, 1000):
 
 outputVectors = []
 for i in range(0, 1000):
-    outputVectors.append([1, 0, 0, 0])
+    outputVectors.append([1, 0, 0, 0, 0, 0, 0, 0, 0])
 
 for i in range(0, 1000):
-    outputVectors.append([0, 1, 0, 0])
+    outputVectors.append([0, 1, 0, 0, 0, 0, 0, 0, 0])
 
 for i in range(0, 1000):
-    outputVectors.append([0, 0, 1, 0])
+    outputVectors.append([0, 0, 1, 0, 0, 0, 0, 0, 0])
 
 for i in range(0, 1000):
-    outputVectors.append([0, 0, 0, 1])
+    outputVectors.append([0, 0, 0, 1, 0, 0, 0, 0, 0])
+
+for i in range(0, 1000):
+    outputVectors.append([0, 0, 0, 0, 1, 0, 0, 0, 0])
+
+for i in range(0, 1000):
+    outputVectors.append([0, 0, 0, 0, 0, 1, 0, 0, 0])
+
+for i in range(0, 1000):
+    outputVectors.append([0, 0, 0, 0, 0, 0, 1, 0, 0])
+
+for i in range(0, 1000):
+    outputVectors.append([0, 0, 0, 0, 0, 0, 0, 1, 0])
+
+for i in range(0, 1000):
+    outputVectors.append([0, 0, 0, 0, 0, 0, 0, 0, 1])
 
 # In[ ]:
 
-print(len(outputVectors))
+# print(len(outputVectors))
 
 testImages = []
 
@@ -72,15 +125,40 @@ for i in range(0, 100):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     testImages.append(gray_image.reshape(89, 100, 1))
 
+# #Load Images for Fist
+for i in range(0, 100):
+    image = cv2.imread('Dataset/FistTest/fist_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    testImages.append(gray_image.reshape(89, 100, 1))
+
+for i in range(0, 100):
+    image = cv2.imread('Dataset/one_test/one_test_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    testImages.append(gray_image.reshape(89, 100, 1))
+
+for i in range(0, 100):
+    image = cv2.imread('Dataset/two_Test/two_Test' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    testImages.append(gray_image.reshape(89, 100, 1))
+
+for i in range(0, 100):
+    image = cv2.imread('Dataset/three_Test/three_Test_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    testImages.append(gray_image.reshape(89, 100, 1))
+
+for i in range(0, 100):
+    image = cv2.imread('Dataset/four_Test/four_Test_' + str(i) + '.png')
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    testImages.append(gray_image.reshape(89, 100, 1))
+
 # #Load Images for Palm
 for i in range(0, 100):
     image = cv2.imread('Dataset/PalmTest/palm_' + str(i) + '.png')
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     testImages.append(gray_image.reshape(89, 100, 1))
     
-# #Load Images for Fist
 for i in range(0, 100):
-    image = cv2.imread('Dataset/FistTest/fist_' + str(i) + '.png')
+    image = cv2.imread('Dataset/six_test/six_test_' + str(i) + '.png')
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     testImages.append(gray_image.reshape(89, 100, 1))
 
@@ -90,20 +168,34 @@ for i in range(0, 100):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     testImages.append(gray_image.reshape(89, 100, 1))
 
-
 testLabels = []
 
 for i in range(0, 100):
-    testLabels.append([1, 0, 0, 0])
+    testLabels.append([1, 0, 0, 0, 0, 0, 0, 0, 0])
 
 for i in range(0, 100):
-    testLabels.append([0, 1, 0, 0])
+    testLabels.append([0, 1, 0, 0, 0, 0, 0, 0, 0])
 
 for i in range(0, 100):
-    testLabels.append([0, 0, 1, 0])
+    testLabels.append([0, 0, 1, 0, 0, 0, 0, 0, 0])
 
 for i in range(0, 100):
-    testLabels.append([0, 0, 0, 1])
+    testLabels.append([0, 0, 0, 1, 0, 0, 0, 0, 0])
+
+for i in range(0, 100):
+    testLabels.append([0, 0, 0, 0, 1, 0, 0, 0, 0])
+
+for i in range(0, 100):
+    testLabels.append([0, 0, 0, 0, 0, 1, 0, 0, 0])
+
+for i in range(0, 100):
+    testLabels.append([0, 0, 0, 0, 0, 0, 1, 0, 0])
+
+for i in range(0, 100):
+    testLabels.append([0, 0, 0, 0, 0, 0, 0, 1, 0])
+
+for i in range(0, 100):
+    testLabels.append([0, 0, 0, 0, 0, 0, 0, 0, 1])
 
 
 # In[ ]:
@@ -135,7 +227,7 @@ convnet=max_pool_2d(convnet,2)
 convnet=fully_connected(convnet,1000,activation='relu')
 convnet=dropout(convnet,0.75)
 
-convnet=fully_connected(convnet,4,activation='softmax')
+convnet=fully_connected(convnet,9,activation='softmax')
 
 convnet=regression(convnet,optimizer='adam',learning_rate=0.001,loss='categorical_crossentropy',name='regression')
 

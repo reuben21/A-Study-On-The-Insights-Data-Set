@@ -151,10 +151,20 @@ def showStatistics(predictedClass, confidence):
     if predictedClass == 0:
         className = "Swing"
     elif predictedClass == 1:
-        className = "Palm"
+        className = "Zero"
     elif predictedClass == 2:
-        className = "Fist"
+        className = "One"
     elif predictedClass == 3:
+        className = "Two"
+    elif predictedClass == 4:
+        className = "Three"
+    elif predictedClass == 5:
+        className = "Four"
+    elif predictedClass == 6:
+        className = "Five"
+    elif predictedClass == 7:
+        className = "Six"
+    elif predictedClass == 8:
         className = "L-Letter"
 
     cv2.putText(textImage,"Pedicted Class : " + className, 
@@ -201,7 +211,7 @@ convnet=max_pool_2d(convnet,2)
 convnet=fully_connected(convnet,1000,activation='relu')
 convnet=dropout(convnet,0.75)
 
-convnet=fully_connected(convnet,4,activation='softmax')
+convnet=fully_connected(convnet,9,activation='softmax')
 
 convnet=regression(convnet,optimizer='adam',learning_rate=0.001,loss='categorical_crossentropy',name='regression')
 
