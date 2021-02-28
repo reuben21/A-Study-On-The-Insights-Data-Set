@@ -54,7 +54,6 @@ const Homepage = () => {
         setInterval(() => {
             return detect(model, returnTensors, 640, 480);
         }, 10);
-
     };
 
     const detect = async (model, returnTensors, width, height) => {
@@ -84,7 +83,7 @@ const Homepage = () => {
             // console.log(face);
 
             const predictions = await model.estimateFaces(video, returnTensors);
-            // console.log(predictions);
+            console.log(predictions);
 
             // Get canvas context
             try {
@@ -95,7 +94,25 @@ const Homepage = () => {
                 if (predictions.length > 0) {
 
                     setState(true)
+                    /*
+                    `predictions` is an array of objects describing each detected face, for example:
 
+                    [
+                      {
+                        topLeft: [232.28, 145.26],
+                        bottomRight: [449.75, 308.36],
+                        probability: [0.998],
+                        landmarks: [
+                          [295.13, 177.64], // right eye
+                          [382.32, 175.56], // left eye
+                          [341.18, 205.03], // nose
+                          [345.12, 250.61], // mouth
+                          [252.76, 211.37], // right ear
+                          [431.20, 204.93] // left ear
+                        ]
+                      }
+                    ]
+                    */
 
                     for (let i = 0; i < predictions.length; i++) {
                         const start = predictions[i].topLeft;
@@ -114,8 +131,8 @@ const Homepage = () => {
                         context.font = "13pt sans-serif";
                         context.fillText(text, start[0] + 5, start[1] + 20);
                     }
-                    setIsOpen(false);
                     sessionStorage.setItem('HumanIsVerified', true)
+                    setIsOpen(false);
                 }
             } catch (err) {
                 console.log(err)
@@ -126,15 +143,20 @@ const Homepage = () => {
 
 
     useEffect(() => {
-        console.log("Entered")
-            if (statusOfHuman === null) {
+            if (state === false) {
                 const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
                     runFacemesh();
-                     clearInterval(intervalId);
 
-                }, 10000)
+
+                        clearInterval(intervalId);
+
+                }, 5000)
             }
-            },
+
+
+            //This is important
+
+        },
         [url, useState]
     )
 
