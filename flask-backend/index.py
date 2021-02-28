@@ -129,7 +129,7 @@ def question1():
     # )
 
 
-@app.route("/section1/question2", methods=['POST','GET'])
+@app.route("/section1/question2", methods=['POST', 'GET'])
 def question2():
     if request.method == 'POST':
         product = request.json['Product']
@@ -195,6 +195,14 @@ def question3a():
     response = {'ImageBytes1': encoded_img1, 'ImageBytes2': encoded_img2}
     return jsonify(response)
 
+
+@app.route("/section1/question4", methods=['GET'])
+def question4():
+    Question.question4()
+    image_path1 = 'question4.png'  # point to your image location
+    encoded_img1 = get_response_image(image_path1)
+    response = {'ImageBytes': encoded_img1}
+    return jsonify(response)
 
 # @app.route("/section1/question3b", methods=['GET'])
 # def question3b():

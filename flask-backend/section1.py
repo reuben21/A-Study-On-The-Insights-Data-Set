@@ -13,6 +13,10 @@ from sklearn.linear_model import LogisticRegression  # needed for creating a mod
 from sklearn.linear_model import Ridge
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
+from sklearn.cluster import KMeans
+
+kmeans = KMeans(5)
+
 
 sns.set()
 
@@ -133,6 +137,54 @@ def question3b():
 
     plt.legend()
     fig.savefig('question3b.png', bbox_inches='tight')
+
+
+def question4():
+    data = pd.read_csv('location.csv')
+    df_filtered = data.copy()
+    currency = df_filtered["Unit Rate Currency"].unique()
+    currency = currency.tolist()
+    df_filtered['Unit Rate Currency'] = df_filtered['Unit Rate Currency'].map(lambda x: currency.index(x))
+
+    spProd = df_filtered["Specific Product"].unique()
+    spProd = spProd.tolist()
+    df_filtered['Specific Product'] = df_filtered['Specific Product'].map(lambda x: spProd.index(x))
+
+    # df_filtered['Qty'] = df_filtered['Qty'].map(lambda x: 0 if x <100 else 1)
+    shipment = df_filtered["Shipment Mode"].unique()
+    shipment = shipment.tolist()
+    df_filtered['Shipment Mode'] = df_filtered['Shipment Mode'].map(lambda x: shipment.index(x))
+
+    prod = df_filtered["Product"].unique()
+    prod = prod.tolist()
+    df_filtered['Product'] = df_filtered['Product'].map(lambda x: prod.index(x))
+
+    pof = df_filtered["Port of Origin"].unique()
+    pof = pof.tolist()
+    df_filtered['Port of Origin'] = df_filtered['Port of Origin'].map(lambda x: pof.index(x))
+
+    cod = df_filtered["Country of Destination"].unique()
+    cod = cod.tolist()
+    df_filtered['Country of Destination'] = df_filtered['Country of Destination'].map(lambda x: cod.index(x))
+
+    pod = df_filtered["Port of Destination"].unique()
+    pod = pod.tolist()
+    df_filtered['Port of Destination'] = df_filtered['Port of Destination'].map(lambda x: pod.index(x))
+
+    df_filtered['Profit'] = df_filtered['Value(INR)'] - (df_filtered['Qty'] * df_filtered['Value(USD)'])
+
+    x = df_filtered.iloc[:, 21:23]
+    kmeans.fit(x.astype(np.float32))
+    identified_clusters = kmeans.fit_predict(x)
+    data_with_clusters = df_filtered.copy()
+    data_with_clusters['Cluster'] = identified_clusters
+    fig = plt.figure()
+    plt.scatter(data_with_clusters['Latitude'], data_with_clusters['Longitude'], c=data_with_clusters['Cluster'],
+                cmap='rainbow')
+    plt.title("Latitude Longitude")
+
+    plt.legend()
+    fig.savefig('question4.png', bbox_inches='tight')
 
 
 def get_preds_ridge(X, Y, alpha):
