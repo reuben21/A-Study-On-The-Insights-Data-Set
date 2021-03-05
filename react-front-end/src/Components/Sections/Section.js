@@ -11,6 +11,7 @@ import * as Colors from "../../COLORS";
 import PhoneIcon from '@material-ui/icons/Phone';
 import Toolbar from "@material-ui/core/Toolbar";
 import Section1 from "./Section1/section1"
+import Section3 from "./Section3/section3"
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -165,7 +166,7 @@ const Sections = () => {
                     Item Two
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
-                    Item Three
+                    <Section3/>
                 </TabPanel>
 
             </SwipeableViews>

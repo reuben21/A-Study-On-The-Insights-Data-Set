@@ -1,2 +1,2 @@
-model_checkpoint_path: "C:\\Users\\harsh\\OneDrive\\Documents\\A-Study-On-The-Insights-Data-Set\\Hand Gesture Recognition\\TrainedLettersModel\\LetterLModel.tfl"
-all_model_checkpoint_paths: "C:\\Users\\harsh\\OneDrive\\Documents\\A-Study-On-The-Insights-Data-Set\\Hand Gesture Recognition\\TrainedLettersModel\\LetterLModel.tfl"
+model_checkpoint_path: "C:\\Users\\reube\\PycharmProjects\\A-Study-On-The-Insights-Data-Set\\Hand Gesture Recognition\\TrainedLettersModel\\LetterLModel.tfl"
+all_model_checkpoint_paths: "C:\\Users\\reube\\PycharmProjects\\A-Study-On-The-Insights-Data-Set\\Hand Gesture Recognition\\TrainedLettersModel\\LetterLModel.tfl"

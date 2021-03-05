@@ -14,7 +14,7 @@ from sklearn.linear_model import Ridge
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.cluster import KMeans
-
+from transformers import GPT2LMHeadModel, GPT2Tokenizer
 kmeans = KMeans(5)
 
 
@@ -194,3 +194,6 @@ def get_preds_ridge(X, Y, alpha):
     ])
     model.fit(X, Y)
     return model.predict(X)
+
+
+

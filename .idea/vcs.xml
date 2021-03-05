@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/discord-gpt2-bot" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gpt2bot" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/yourAI" vcs="Git" />
   </component>
 </project>

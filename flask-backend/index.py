@@ -120,13 +120,6 @@ def question1():
     response = {'Status': 'Success', 'ImageBytes': encoded_img}
     return jsonify(response)
 
-    #     {
-    #     "labels": list_of_keys,
-    #     "values": list_of_values,
-    #     "colors": rand_color.generate(hue="blue", count=10)
-    # }
-
-    # )
 
 
 @app.route("/section1/question2", methods=['POST', 'GET'])
@@ -203,6 +196,7 @@ def question4():
     encoded_img1 = get_response_image(image_path1)
     response = {'ImageBytes': encoded_img1}
     return jsonify(response)
+
 
 # @app.route("/section1/question3b", methods=['GET'])
 # def question3b():
